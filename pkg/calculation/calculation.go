@@ -87,7 +87,7 @@ func ExpressionToRPN(expresison string) ([]interface{}, error) {
 				} else {
 					for {
 						if len(stack) == 0 {
-							return nil, ErrBadReversedPoland
+							return nil, ErrInvalidExpression
 						}
 						if stack[len(stack)-1] == "(" {
 							stack = stack[:len(stack)-1]

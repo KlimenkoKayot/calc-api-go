@@ -15,74 +15,69 @@ type Test struct {
 func TestCalc(t *testing.T) {
 	cases := []Test{
 		{
-			name:       "Good test #1",
-			expression: "(2+2)*2",
-			expected:   8,
-		},
-		{
-			name:       "Good test #2",
+			name:       "Default expression",
 			expression: "2+2*2",
 			expected:   6,
 		},
 		{
-			name:       "Good test #3",
+			name:       "Default expression with ()",
+			expression: "(2+2)*2",
+			expected:   8,
+		},
+		{
+			name:       "Big default expression",
 			expression: "2+2*2+3*(5+1)*2/2/5/1+3/4",
 			expected:   10.35,
 		},
 		{
-			name:       "Good test #4",
+			name:       "Expression with spaces",
 			expression: "(   (2  )  )",
 			expected:   2,
 		},
 		{
-			name:       "Good test #5",
+			name:       "Hard expression",
 			expression: "((2-2)+1)/2",
 			expected:   0.5,
 		},
 		{
-			name:       "Error test #1",
+			name:       "ERROR only ()",
 			expression: "(()",
 			err:        ErrInvalidExpression,
 		},
 		{
-			name:       "Error test #2",
+			name:       "ERROR invalid symbol",
 			expression: "g",
 			err:        ErrInvalidSymbolExpression,
 		},
 		{
-			name:       "Error test #3",
+			name:       "ERROR devision by zero",
 			expression: "2/0",
 			err:        ErrDevisionByZero,
 		},
 		{
-			name:       "Error test #4",
-			expression: "2/0",
-			err:        ErrDevisionByZero,
-		},
-		{
-			name:       "Error test #5",
+			name:       "ERROR empty expression",
 			expression: "",
 			err:        ErrEmptyExpression,
 		},
 		{
-			name:       "Error test #6",
+			name:       "ERROR invalid expression #1",
 			expression: "+)",
-			err:        ErrBadReversedPoland,
+			err:        ErrInvalidExpression,
 		},
 		{
-			name:       "Error test #7",
+			name:       "ERROR invalid expression #2",
 			expression: "-+-2+",
 			err:        ErrInvalidExpression,
 		},
 		{
-			name:       "Error test #7",
-			expression: "2?3",
-			err:        ErrInvalidSymbolExpression,
-		},
-		{
-			name:       "Error test #8",
+			name:       "ERROR invalid expression #3",
 			expression: "2+2(2)(2)(20)",
 			err:        ErrInvalidExpression,
+		},
+		{
+			name:       "ERROR invalid operation",
+			expression: "2?3",
+			err:        ErrInvalidSymbolExpression,
 		},
 	}
 
