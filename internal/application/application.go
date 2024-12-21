@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/klimenkokayot/calc-api-go/pkg/apperrors"
+	"github.com/klimenkokayot/calc-api-go/internal/apperrors"
 	"github.com/klimenkokayot/calc-api-go/pkg/calculation"
 )
 
