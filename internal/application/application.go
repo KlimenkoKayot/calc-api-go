@@ -9,6 +9,7 @@ import (
 
 	"github.com/klimenkokayot/calc-api-go/internal/apperrors"
 	"github.com/klimenkokayot/calc-api-go/pkg/calculation"
+	"github.com/klimenkokayot/calc-api-go/pkg/middlewares"
 )
 
 type Config struct {
@@ -86,7 +87,10 @@ func NewApplication() *Application {
 func (app *Application) StartServer() error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/calculate", CalcHandler)
+
+	mux2 := middlewares.RequestLogger(mux)
+
 	fmt.Println("server started at port ", app.Config.Port)
-	http.ListenAndServe(":"+app.Config.Port, mux)
+	http.ListenAndServe(":"+app.Config.Port, mux2)
 	return nil
 }

@@ -4,6 +4,16 @@
 
 ***
 
+### HOW TO BUILD
+
+#### Задать порт в env:
+    export PORT="XXXX"
+
+#### Команда для запуска сервера:
+    go run ./cmd/.
+
+***
+
 ### Входящие данные
 
 Запросы обрабатываются по следующим URL:
@@ -63,6 +73,14 @@
 	ErrEmptyExpression         = "empty expression"
 
 *** 
+
+### Логгер
+
+Используется middleware с логгированием всех запросов и обработкой статус кода 500 StatusInternalServerError
+    
+    /pkg/middlewares/
+
+***
 
 ### Тестирование с покрытием
 
