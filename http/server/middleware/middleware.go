@@ -1,13 +1,20 @@
-package middlewares
+package middleware
 
 import (
 	"bytes"
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
-func RequestLogger(next http.Handler) http.Handler {
+func RequestLogger(next http.Handler, filename string) http.Handler {
+	file, err := os.Create(filename)
+	if err != nil {
+		log.Printf("RequestLogger cant create file with name: %s", filename)
+		return next
+	}
+	log.SetOutput(file)
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		buf, _ := io.ReadAll(r.Body)
 		rdr := io.NopCloser(bytes.NewBuffer(buf))
@@ -16,7 +23,7 @@ func RequestLogger(next http.Handler) http.Handler {
 
 		r.Body = rdr
 
-		log.Println(request)
+		log.Println(request, log.Ldate)
 
 		defer func() {
 			if err := recover(); err != nil {

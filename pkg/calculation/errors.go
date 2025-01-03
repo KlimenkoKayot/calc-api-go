@@ -1,4 +1,4 @@
-package calcerrors
+package calculation
 
 import (
 	"errors"

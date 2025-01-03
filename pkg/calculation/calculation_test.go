@@ -5,8 +5,6 @@ package calculation
 
 import (
 	"testing"
-
-	"github.com/klimenkokayot/calc-api-go/pkg/calcerrors"
 )
 
 type Test struct {
@@ -46,42 +44,42 @@ func TestCalc(t *testing.T) {
 		{
 			name:       "ERROR only ()",
 			expression: "(()",
-			err:        calcerrors.ErrInvalidExpression,
+			err:        ErrInvalidExpression,
 		},
 		{
 			name:       "ERROR invalid symbol",
 			expression: "g",
-			err:        calcerrors.ErrInvalidSymbolExpression,
+			err:        ErrInvalidSymbolExpression,
 		},
 		{
 			name:       "ERROR devision by zero",
 			expression: "2/0",
-			err:        calcerrors.ErrDevisionByZero,
+			err:        ErrDevisionByZero,
 		},
 		{
 			name:       "ERROR empty expression",
 			expression: "",
-			err:        calcerrors.ErrEmptyExpression,
+			err:        ErrEmptyExpression,
 		},
 		{
 			name:       "ERROR invalid expression #1",
 			expression: "+)",
-			err:        calcerrors.ErrInvalidExpression,
+			err:        ErrInvalidExpression,
 		},
 		{
 			name:       "ERROR invalid expression #2",
 			expression: "-+-2+",
-			err:        calcerrors.ErrInvalidExpression,
+			err:        ErrInvalidExpression,
 		},
 		{
 			name:       "ERROR invalid expression #3",
 			expression: "2+2(2)(2)(20)",
-			err:        calcerrors.ErrInvalidExpression,
+			err:        ErrInvalidExpression,
 		},
 		{
 			name:       "ERROR invalid operation",
 			expression: "2?3",
-			err:        calcerrors.ErrInvalidSymbolExpression,
+			err:        ErrInvalidSymbolExpression,
 		},
 	}
 

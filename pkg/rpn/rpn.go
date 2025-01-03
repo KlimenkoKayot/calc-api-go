@@ -3,8 +3,6 @@ package rpn
 import (
 	"strconv"
 	"unicode"
-
-	"github.com/klimenkokayot/calc-api-go/pkg/calcerrors"
 )
 
 type Node struct {
@@ -47,7 +45,7 @@ func ExpressionToStack(expresison string) ([]Node, error) {
 			result = append(result, Node{Value: num, IsFloat64: true})
 			j = lastIdx - 1
 		default:
-			return nil, calcerrors.ErrInvalidSymbolExpression
+			return nil, ErrInvalidSymbolExpression
 		}
 	}
 	return result, nil
@@ -89,7 +87,7 @@ func ExpressionToRPN(expresison string) ([]interface{}, error) {
 				} else {
 					for {
 						if len(stack) == 0 {
-							return nil, calcerrors.ErrInvalidExpression
+							return nil, ErrInvalidExpression
 						}
 						if stack[len(stack)-1] == "(" {
 							stack = stack[:len(stack)-1]

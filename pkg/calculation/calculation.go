@@ -1,7 +1,6 @@
 package calculation
 
 import (
-	"github.com/klimenkokayot/calc-api-go/pkg/calcerrors"
 	"github.com/klimenkokayot/calc-api-go/pkg/rpn"
 )
 
@@ -16,7 +15,7 @@ func Calc(expression string) (float64, error) {
 			val = append(val, num)
 		} else {
 			if len(val) < 2 {
-				return 0.0, calcerrors.ErrInvalidExpression
+				return 0.0, ErrInvalidExpression
 			}
 
 			b := val[len(val)-1]
@@ -33,17 +32,17 @@ func Calc(expression string) (float64, error) {
 				val = append(val, a*b)
 			case "/":
 				if b == 0 {
-					return 0.0, calcerrors.ErrDevisionByZero
+					return 0.0, ErrDevisionByZero
 				}
 				val = append(val, a/b)
 			}
 		}
 	}
 	if len(val) > 1 {
-		return 0.0, calcerrors.ErrInvalidExpression
+		return 0.0, ErrInvalidExpression
 	}
 	if len(val) == 0 {
-		return 0.0, calcerrors.ErrEmptyExpression
+		return 0.0, ErrEmptyExpression
 	}
 	return val[0], nil
 }
