@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"bytes"
 	"io"
 	"log"
 	"net/http"
@@ -8,8 +9,12 @@ import (
 
 func RequestLogger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		data, _ := io.ReadAll(r.Body)
-		request := string(data)
+		buf, _ := io.ReadAll(r.Body)
+		rdr := io.NopCloser(bytes.NewBuffer(buf))
+
+		request := string(buf)
+
+		r.Body = rdr
 
 		log.Println(request)
 
